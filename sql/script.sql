@@ -14,6 +14,15 @@ CREATE TABLE IF NOT EXISTS profesores(
   baja_temporal BIT NOT NULL
 );
 
+/* TABLA 2 - ETAPAS*/
+CREATE TABLE IF NOT EXISTS etapas(
+  codEtapa CHAR(5) PRIMARY KEY,
+  nombre VARCHAR(30) NOT NULL,
+  coordinador TINYINT NOT NULL,
+  CONSTRAINT fk_etapas_profesores FOREIGN KEY (coordinador) REFERENCES profesores(idUsuario)
+);
+
+
 /* TABLA 4-ALUMNOS */
 CREATE TABLE  IF NOT EXISTS alumnos(
   nia CHAR (7) PRIMARY KEY,
@@ -30,11 +39,19 @@ CREATE TABLE IF NOT EXISTS profesores_seccion(
   CONSTRAINT fk_profesor_prof_secc FOREIGN KEY (profesor) REFERENCES profesores(idUsuario),
   CONSTRAINT fk_seccion_prof_secc FOREIGN KEY (idSeccion) REFERENCES secciones(idSeccion)
 );
+
+/*TABLA 8 - ASIGNATURAS*/
+CREATE TABLE IF NOT EXISTS asignaturas(
+  codAsignatura CHAR(7) PRIMARY KEY,
+  nombre VARCHAR(40) NOT NULL
+);
+
 /*TABLA 9 - HORAS*/
 CREATE TABLE IF NOT EXISTS horas(
   idHora TINYINT UNSIGNED PRIMARY KEY,
   nombre VARCHAR(20) NOT NULL
 );
+
 /*TABLA 10 - INCIDENCIAS*/
 CREATE TABLE IF NOT EXISTS incidencias(
   idIncidencia SMALLINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -53,8 +70,9 @@ CREATE TABLE IF NOT EXISTS incidencias(
   CONSTRAINT fk_incidencias_tipo FOREIGN KEY (idTipo) REFERENCES tipo_Incidencias(idTipo),
   CONSTRAINT fk_incidencias_profesor FOREIGN KEY (usuario) REFERENCES profesores(idUsuario),
   CONSTRAINT fk_incidencias_asignatura FOREIGN KEY (codAsignatura) REFERENCES asignaturas(idAsignatura),
-  CONSTRAINT fk_incidencias_hora FOREIGN KEY (idHora) REFERENCES horas(idHora)
+  CONSTRAINT fk_incidencias_hora FOREIGN KEY (idHora) REFERENCES hora(idHora)
 );
+
 /*TABLA 12 - tipos_anotaciones_etapas*/
 CREATE TABLE IF NOT EXISTS tipos_anotaciones_etapas(
   tipoAnotacion TINYINT UNSIGNED NOT NULL ,
@@ -64,10 +82,11 @@ CREATE TABLE IF NOT EXISTS tipos_anotaciones_etapas(
   REFERENCES tipos_anotaciones (tipoAnotacion),
   CONSTRAINT fk_anotacion_etapas_2 FOREIGN KEY (codEtapa) REFERENCES etapas(codEtapa)
 );
+
 /* TABLA 13-ANOTACIONES */
 CREATE TABLE IF NOT EXISTS anotaciones(
   numAnotacion SMALLINT UNSIGNED PRIMARY KEY,
-  tipoAnotacion TINYINT UNSIGNED NOT NULL,
+  tipoAnotacion TINYINT NOT NULL,
   nia CHAR(7) NOT NULL ,
   hora_Registro DATETIME NOT NULL,
   userCreacion CHAR(1) NOT NULL ,
