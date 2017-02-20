@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS incidencias(
   CONSTRAINT fk_incidencias_tipo FOREIGN KEY (idTipo) REFERENCES tipo_Incidencias(idTipo),
   CONSTRAINT fk_incidencias_profesor FOREIGN KEY (usuario) REFERENCES profesores(idUsuario),
   CONSTRAINT fk_incidencias_asignatura FOREIGN KEY (codAsignatura) REFERENCES asignaturas(idAsignatura),
-  CONSTRAINT fk_incidencias_hora FOREIGN KEY (idHora) REFERENCES hora(idHora),
+  CONSTRAINT fk_incidencias_hora FOREIGN KEY (idHora) REFERENCES hora(idHora)
 );
 
 /* TABLA 13-ANOTACIONES */
