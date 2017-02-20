@@ -30,7 +30,11 @@ CREATE TABLE IF NOT EXISTS profesores_seccion(
   CONSTRAINT fk_profesor_prof_secc FOREIGN KEY (profesor) REFERENCES profesores(idUsuario),
   CONSTRAINT fk_seccion_prof_secc FOREIGN KEY (idSeccion) REFERENCES secciones(idSeccion)
 );
-
+/*TABLA 9 - HORAS*/
+CREATE TABLE IF NOT EXISTS horas(
+  idHora TINYINT UNSIGNED PRIMARY KEY,
+  nombre VARCHAR(20) NOT NULL
+);
 /*TABLA 10 - INCIDENCIAS*/
 CREATE TABLE IF NOT EXISTS incidencias(
   idIncidencia SMALLINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -49,13 +53,21 @@ CREATE TABLE IF NOT EXISTS incidencias(
   CONSTRAINT fk_incidencias_tipo FOREIGN KEY (idTipo) REFERENCES tipo_Incidencias(idTipo),
   CONSTRAINT fk_incidencias_profesor FOREIGN KEY (usuario) REFERENCES profesores(idUsuario),
   CONSTRAINT fk_incidencias_asignatura FOREIGN KEY (codAsignatura) REFERENCES asignaturas(idAsignatura),
-  CONSTRAINT fk_incidencias_hora FOREIGN KEY (idHora) REFERENCES hora(idHora)
+  CONSTRAINT fk_incidencias_hora FOREIGN KEY (idHora) REFERENCES horas(idHora)
 );
-
+/*TABLA 12 - tipos_anotaciones_etapas*/
+CREATE TABLE IF NOT EXISTS tipos_anotaciones_etapas(
+  tipoAnotacion TINYINT UNSIGNED NOT NULL ,
+  codEtapa CHAR(5) NOT NULL,
+  PRIMARY KEY (tipoAnotacion,codEtapa),
+  CONSTRAINT fk_anotacion_etapas_1 FOREIGN KEY (tipoAnotacion)
+  REFERENCES tipos_anotaciones (tipoAnotacion),
+  CONSTRAINT fk_anotacion_etapas_2 FOREIGN KEY (codEtapa) REFERENCES etapas(codEtapa)
+);
 /* TABLA 13-ANOTACIONES */
 CREATE TABLE IF NOT EXISTS anotaciones(
   numAnotacion SMALLINT UNSIGNED PRIMARY KEY,
-  tipoAnotacion TINYINT NOT NULL,
+  tipoAnotacion TINYINT UNSIGNED NOT NULL,
   nia CHAR(7) NOT NULL ,
   hora_Registro DATETIME NOT NULL,
   userCreacion CHAR(1) NOT NULL ,
