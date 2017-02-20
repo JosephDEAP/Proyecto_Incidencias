@@ -1,7 +1,5 @@
 /* 20/02/2017 */
 
-<<<<<<< HEAD
-=======
 CREATE DATABASE IF NOT EXISTS IncidenciasEVG;
 USE IncidenciasEVG;
 
@@ -159,5 +157,5 @@ CREATE TABLE IF NOT EXISTS gestion(
   nombre VARCHAR(20) NOT NULL,
   pass VARCHAR(255) NOT NULL,
   tipo CHAR(1) NOT NULL
->>>>>>> origin/master
+
 );
