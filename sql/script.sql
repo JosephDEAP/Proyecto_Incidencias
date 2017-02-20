@@ -40,6 +40,19 @@ CREATE TABLE IF NOT EXISTS profesores_seccion(
   CONSTRAINT fk_seccion_prof_secc FOREIGN KEY (idSeccion) REFERENCES secciones(idSeccion)
 );
 
+/*Tabla 6- tipos_incidencias*/
+CREATE TABLE tipo_Incidencias(
+  idTipo tinyint UNSIGNED PRIMARY KEY,
+  nombre varchar(30) NOT NULL
+);
+/*Tabla 7-tiposIncidencias_Etapas */
+CREATE TABLE tiposIncidencias_Etapas(
+  codEtapa char(5) NOT NULL,
+  idTipo tinyint UNSIGNED NOT NULL,
+  CONSTRAINT pk_TiposIncidencias_Etapas PRIMARY KEY (codEtapa,idTipo),
+  CONSTRAINT fk_etapas_TiposIncidencias_Etapas FOREIGN KEY (codEtapa) REFERENCES etapas(codEtapa),
+  CONSTRAINT fk_tipos_TiposIncidencias_Etapas FOREIGN KEY (idTipo) REFERENCES tipo_Incidencias(idTipo)
+);
 /*TABLA 8 - ASIGNATURAS*/
 CREATE TABLE IF NOT EXISTS asignaturas(
   codAsignatura CHAR(7) PRIMARY KEY,
@@ -69,17 +82,21 @@ CREATE TABLE IF NOT EXISTS incidencias(
   CONSTRAINT fk_incidencias_alumno FOREIGN KEY (nia) REFERENCES alumnos(nia),
   CONSTRAINT fk_incidencias_tipo FOREIGN KEY (idTipo) REFERENCES tipo_Incidencias(idTipo),
   CONSTRAINT fk_incidencias_profesor FOREIGN KEY (usuario) REFERENCES profesores(idUsuario),
-  CONSTRAINT fk_incidencias_asignatura FOREIGN KEY (codAsignatura) REFERENCES asignaturas(idAsignatura),
-  CONSTRAINT fk_incidencias_hora FOREIGN KEY (idHora) REFERENCES hora(idHora)
+  CONSTRAINT fk_incidencias_asignatura FOREIGN KEY (codAsignatura) REFERENCES asignaturas(codAsignatura),
+  CONSTRAINT fk_incidencias_hora FOREIGN KEY (idHora) REFERENCES horas(idHora)
 );
-
+/*Tabla 11-tipos_Anotaciones*/
+CREATE TABLE tipos_Anotaciones(
+  tipoAnotacion TINYINT PRIMARY KEY,
+  nombre varchar(40) NOT NULL
+);
 /*TABLA 12 - tipos_anotaciones_etapas*/
 CREATE TABLE IF NOT EXISTS tipos_anotaciones_etapas(
   tipoAnotacion TINYINT UNSIGNED NOT NULL ,
   codEtapa CHAR(5) NOT NULL,
   PRIMARY KEY (tipoAnotacion,codEtapa),
   CONSTRAINT fk_anotacion_etapas_1 FOREIGN KEY (tipoAnotacion)
-  REFERENCES tipos_anotaciones (tipoAnotacion),
+  REFERENCES tipos_Anotaciones (tipoAnotacion),
   CONSTRAINT fk_anotacion_etapas_2 FOREIGN KEY (codEtapa) REFERENCES etapas(codEtapa)
 );
 
