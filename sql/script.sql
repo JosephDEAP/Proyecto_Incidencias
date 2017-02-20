@@ -26,8 +26,8 @@ CREATE TABLE IF NOT EXISTS etapas(
 CREATE TABLE IF NOT EXISTS secciones(
   idSeccion CHAR(6) NOT NULL PRIMARY KEY,
   nombre VARCHAR(60) NOT NULL,
-  tutor TINYINT NOT NULL,
-  CONSTRAINT fk_tutores_secciones FOREIGN KEY (tutor) REFERENCES profesores(idUsusario)
+  tutor TINYINT UNSIGNED NOT NULL,
+  CONSTRAINT fk_tutores_secciones FOREIGN KEY (tutor) REFERENCES profesores(idUsuario)
 );
 
 /* TABLA 4-ALUMNOS */
@@ -126,29 +126,29 @@ CREATE TABLE IF NOT EXISTS anotaciones(
 
 /* TABLA 14 - TIPO_SANCION*/
 CREATE TABLE IF NOT EXISTS tipo_sancion(
-  tipoSancion TINYINT NOT NULL PRIMARY KEY,
+  tipoSancion TINYINT UNSIGNED NOT NULL PRIMARY KEY,
   nombre VARCHAR(20) NOT NULL
 );
 
 /* TABLA 15 - SANCIONES*/
 CREATE TABLE IF NOT EXISTS sanciones(
-  idSancion SMALLINT NOT NULL PRIMARY KEY,
-  idIncidencia SMALLINT NOT NULL,
-  tipoSancion TINYINT NOT NULL,
+  idSancion SMALLINT UNSIGNED NOT NULL PRIMARY KEY,
+  idIncidencia SMALLINT UNSIGNED NOT NULL,
+  tipoSancion TINYINT  UNSIGNED NOT NULL,
   fecha_inicio DATE NOT NULL,
   fecha_fin DATE,
-  observacion VARCHAR(300) NOT NULL
+  observacion VARCHAR(300) NOT NULL,
   CONSTRAINT fk_incidencias_sanciones FOREIGN KEY (idIncidencia) REFERENCES incidencias(idIncidencia),
   CONSTRAINT fk_tipo_sancion_sanciones FOREIGN KEY (tipoSancion) REFERENCES tipo_sancion(tipoSancion)
 );
 
 /* TABLA 16 - TIPO_SANCION_INCIDENCIAS*/
 CREATE TABLE IF NOT EXISTS tipo_sancion_incidencias(
-  tipoSancion TINYINT NOT NULL,
-  idTipo TINYINT NOT NULL,
+  tipoSancion TINYINT UNSIGNED NOT NULL,
+  idTipo TINYINT  UNSIGNED NOT NULL,
   PRIMARY KEY (tipoSancion,idTipo),
   CONSTRAINT fk_tipo_sancion_incidencias_1 FOREIGN KEY (tipoSancion) REFERENCES tipo_sancion(tipoSancion),
-  CONSTRAINT fk_tipo_sancion_incidencias_2 FOREIGN KEY (idTipo) REFERENCES tipos_incidencias(idTipo)
+  CONSTRAINT fk_tipo_sancion_incidencias_2 FOREIGN KEY (idTipo) REFERENCES tipo_Incidencias(idTipo)
 );
 
 /* TABLA 17-GESTION */
