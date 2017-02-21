@@ -61,7 +61,7 @@ CREATE TABLE tiposIncidencias_Etapas(
   CONSTRAINT fk_etapas_TiposIncidencias_Etapas FOREIGN KEY (codEtapa) REFERENCES etapas(codEtapa),
   CONSTRAINT fk_tipos_TiposIncidencias_Etapas FOREIGN KEY (idTipo) REFERENCES tipo_Incidencias(idTipo)
 );
-
+EE
 /*TABLA 8 - ASIGNATURAS*/
 CREATE TABLE IF NOT EXISTS asignaturas(
   codAsignatura CHAR(7) PRIMARY KEY,
