@@ -1,5 +1,7 @@
 /* 20/02/2017 */
 
+/* BORRAME RAFA*/
+
 CREATE DATABASE IF NOT EXISTS IncidenciasEVG;
 USE IncidenciasEVG;
 
