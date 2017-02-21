@@ -55,7 +55,7 @@ CREATE TABLE tipo_Incidencias(
   nombre varchar(30) NOT NULL
 );
 
-
+EQEQ
 
 /*TABLA 8 - ASIGNATURAS*/
 CREATE TABLE IF NOT EXISTS asignaturas(
