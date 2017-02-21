@@ -1,6 +1,6 @@
 /* 20/02/2017 */
 
-/* BORRAME RAFA PAYASO*/
+/* BORRAME RAFA PAYASdO*/
 
 CREATE DATABASE IF NOT EXISTS IncidenciasEVG;
 USE IncidenciasEVG;
@@ -55,14 +55,7 @@ CREATE TABLE tipo_Incidencias(
   nombre varchar(30) NOT NULL
 );
 
-/*Tabla 7-tiposIncidencias_Etapas */
-CREATE TABLE tiposIncidencias_Etapas(
-  codEtapa char(5) NOT NULL,
-  idTipo tinyint UNSIGNED NOT NULL,
-  CONSTRAINT pk_TiposIncidencias_Etapas PRIMARY KEY (codEtapa,idTipo),
-  CONSTRAINT fk_etapas_TiposIncidencias_Etapas FOREIGN KEY (codEtapa) REFERENCES etapas(codEtapa),
-  CONSTRAINT fk_tipos_TiposIncidencias_Etapas FOREIGN KEY (idTipo) REFERENCES tipo_Incidencias(idTipo)
-);
+
 
 /*TABLA 8 - ASIGNATURAS*/
 CREATE TABLE IF NOT EXISTS asignaturas(
